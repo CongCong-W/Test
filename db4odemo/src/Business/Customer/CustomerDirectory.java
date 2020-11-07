@@ -5,10 +5,30 @@
  */
 package Business.Customer;
 
+import Business.Employee.Employee;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author harold
  */
 public class CustomerDirectory {
-    
+
+    private final List<Customer> entityList = new ArrayList<>();
+
+    public List<Customer> getEntityList() {
+        return entityList;
+    }
+
+    public void add(Customer entity){
+        entityList.add(entity);
+    }
+
+    public Customer createEntity(String username, String password, Employee employee){
+        Customer userAccount = new Customer(username, password, employee);
+        entityList.add(userAccount);
+        return userAccount;
+    }
 }
