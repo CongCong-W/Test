@@ -19,12 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1739d6d4-242b-416e-98ef-06335a7ba9e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab_3new/target/classes/.netbeans_automatic_build" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab_3new/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab_3new/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lab_3new/target/test-classes/.netbeans_automatic_build" beforeDir="false" />
+    <list default="true" id="1739d6d4-242b-416e-98ef-06335a7ba9e6" name="Default Changelist" comment="add admin panel">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,8 +47,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/userinterface/SystemAdminWorkArea" />
     <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/userinterface/SystemAdminWorkArea" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -63,7 +64,16 @@
       <option name="presentableId" value="Default" />
       <updated>1604724111237</updated>
       <workItem from="1604724112661" duration="323000" />
+      <workItem from="1604727919129" duration="753000" />
     </task>
+    <task id="LOCAL-00001" summary="add admin panel">
+      <created>1604728061161</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604728061161</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -79,11 +89,16 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add admin panel" />
+    <option name="LAST_COMMIT_MESSAGE" value="add admin panel" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="320" y="164" key="Vcs.Push.Dialog.v2" timestamp="1604724345042">
+    <state x="320" y="164" key="Vcs.Push.Dialog.v2" timestamp="1604728072782">
       <screen x="0" y="23" width="1440" height="810" />
     </state>
-    <state x="320" y="164" key="Vcs.Push.Dialog.v2/0.23.1440.810@0.23.1440.810" timestamp="1604724345042" />
+    <state x="320" y="164" key="Vcs.Push.Dialog.v2/0.23.1440.810@0.23.1440.810" timestamp="1604728072782" />
   </component>
 </project>
