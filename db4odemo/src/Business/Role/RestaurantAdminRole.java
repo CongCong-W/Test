@@ -6,22 +6,23 @@ package Business.Role;
 
 import Business.EcoSystem;
 
-import Business.Organization;
 import Business.UserAccount.UserAccount;
 import userinterface.RestaurantAdminRole.RestaurantAdminWorkAreaJPanel;
+
 import javax.swing.JPanel;
 
 /**
- *
  * @author raunak
  */
-public class RestaurantAdminRole extends Role{
+public class RestaurantAdminRole extends Role {
+
+    @Override
+    public RoleType getRoleType() {
+        return RoleType.RestaurantAdmin;
+    }
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
-        return new RestaurantAdminWorkAreaJPanel(userProcessContainer);
+        return new RestaurantAdminWorkAreaJPanel(userProcessContainer, (Business.Restaurant.Restaurant) account, business);
     }
-
-
-
 }

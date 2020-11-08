@@ -3,36 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.DeliveryMan;
+package Business.Restaurant;
 
 import Business.Employee.Employee;
 import Business.UserAccount.UserAccountDirectory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
  * @author harold
  */
-public class DeliveryManDirectory {
+public class RestaurantDirectory {
 
     private final UserAccountDirectory userAccountDirectory;
 
-    private final List<DeliveryMan> entityList = new ArrayList<>();
+    private final List<Restaurant> entityList = new ArrayList<>();
 
-    public DeliveryManDirectory(UserAccountDirectory userAccountDirectory) {
+    public RestaurantDirectory(UserAccountDirectory userAccountDirectory) {
         this.userAccountDirectory = userAccountDirectory;
     }
 
-    public List<DeliveryMan> getEntityList() {
-        entityList.removeIf(Objects::isNull);
+    public List<Restaurant> getEntityList() {
         return entityList;
     }
 
-    public void insert(DeliveryMan entity) {
+    public void insert(Restaurant entity) {
         if (entity == null) {
             return;
         }
@@ -40,39 +37,36 @@ public class DeliveryManDirectory {
         userAccountDirectory.insert(entity);
     }
 
-    public int update(DeliveryMan entity) {
+    public int update(Restaurant entity) {
         if (entity == null) {
             return -1;
         }
         int target = -1;
         for (int i = 0; i < entityList.size(); i++) {
-            if (entityList.get(i) == null) {
-                continue;
-            }
             if (entityList.get(i).getEmployee().getId() == entity.getEmployee().getId()) {
                 target = i;
             }
         }
         if (target < 0) {
-            System.out.println("Update DeliveryMan failed: no such DeliveryMan");
+            System.out.println("Update RestaurantAdmin failed: no such RestaurantAdmin");
             return target;
         }
         entityList.set(target, entity);
         userAccountDirectory.update(entity);
-        System.out.println("Update DeliveryMan success: " + entity);
+        System.out.println("Update RestaurantAdmin success: " + entity);
         return target;
     }
 
-    public void delete(DeliveryMan entity) {
+    public void delete(Restaurant entity) {
         entityList.remove(entity);
         userAccountDirectory.delete(entity);
-        System.out.println("Delete DeliveryMan success:" + entity);
+        System.out.println("Delete RestaurantAdmin success:" + entity);
     }
 
-    public DeliveryMan createEntity(String username, String password, Employee employee) {
-        DeliveryMan entity = new DeliveryMan(username, password, employee);
+    public Restaurant createEntity(String username, String password, Employee employee) {
+        Restaurant entity = new Restaurant(username, password, employee);
         insert(entity);
-        System.out.println("Create DeliveryMan success:" + entity);
+        System.out.println("Create RestaurantAdmin success:" + entity);
         return entity;
     }
 }

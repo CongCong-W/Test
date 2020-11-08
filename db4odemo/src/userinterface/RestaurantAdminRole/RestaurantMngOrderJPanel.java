@@ -2,57 +2,64 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.DeliveryManRole;
+package userinterface.RestaurantAdminRole;
 
 import Business.EcoSystem;
-import Business.UserAccount.UserAccount;
+import Business.Restaurant.MenuItem;
+import Business.Restaurant.Restaurant;
 import Business.WorkQueue.Order;
 import Business.WorkQueue.WorkRequest;
 
+import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
 
 /**
  *
  * @author raunak
  */
-public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
+public class RestaurantMngOrderJPanel extends javax.swing.JPanel {
 
     private JPanel container;
     private EcoSystem system;
-    private UserAccount userAccount;
-    
-    
-    /**
-     * Creates new form LabAssistantWorkAreaJPanel
-     */
-    public DeliveryManWorkAreaJPanel(JPanel container, UserAccount account, EcoSystem system) {
-        initComponents();
-        
-        this.container = container;
-        this.userAccount = account;
-        this.system = system;
-      
-        
-        populateTable();
+    private Restaurant restaurant;
+
+    public static void show(JPanel cardSequenceJPanel, EcoSystem system, Restaurant restaurant) {
+        RestaurantMngOrderJPanel restaurantMngOrderJPanel = new RestaurantMngOrderJPanel(cardSequenceJPanel, system, restaurant);
+        cardSequenceJPanel.add("RestaurantMngOrderJPanel", restaurantMngOrderJPanel);
+        CardLayout layout = (CardLayout) cardSequenceJPanel.getLayout();
+        layout.next(cardSequenceJPanel);
     }
 
     @Override
     public void setVisible(boolean aFlag) {
         super.setVisible(aFlag);
-        populateTable();
+        populateRequestTable();
     }
 
-    public void populateTable(){
+    /**
+     * Creates new form DoctorWorkAreaJPanel
+     */
+    public RestaurantMngOrderJPanel(JPanel container, EcoSystem system, Restaurant restaurant) {
+        initComponents();
+        
+        this.container = container;
+        this.system = system;
+        this.restaurant = restaurant;
+        //valueLabel.setText(enterprise.getName());
+        populateRequestTable();
+    }
+    
+    public void populateRequestTable(){
         int rowCount = tblOrders.getRowCount();
         DefaultTableModel model = (DefaultTableModel) tblOrders.getModel();
         for (int i = rowCount - 1; i >= 0; i--) {
             model.removeRow(i);
         }
 
-        ArrayList<WorkRequest> orders = userAccount.getWorkQueue().getWorkRequestList();
+        ArrayList<WorkRequest> orders = restaurant.getWorkQueue().getWorkRequestList();
         if (orders == null || orders.size() == 0) {
             return;
         }
@@ -61,13 +68,14 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
             Order order = (Order) item;
             Object[] row = new Object[6];
             row[0] = order;
-            row[1] = order.getSender();
-            row[2] = order.getReceiver();
-            row[3] = order.getStatus();
+            row[1] = order.getReceiver();
+            row[2] = order.getStatus();
+            row[3] = order.getRequestDateStr();
             model.addRow(row);
         }
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,25 +87,23 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrders = new javax.swing.JTable();
+        refreshTestJButton = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         btnProcess = new javax.swing.JButton();
-        btnFresh = new javax.swing.JButton();
 
         tblOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Message", "Receiver", "Status", "Result"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -116,17 +122,24 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
             tblOrders.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        refreshTestJButton.setText("Refresh");
+        refreshTestJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshTestJButtonActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("<<Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnProcessActionPerformed(evt);
-            }
-        });
-
-        btnFresh.setText("Refresh");
-        btnFresh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFreshActionPerformed(evt);
             }
         });
 
@@ -136,28 +149,44 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnProcess)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(406, 406, 406)
-                            .addComponent(btnFresh))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(108, 108, 108)
-                            .addComponent(btnProcess)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(222, Short.MAX_VALUE))
+                            .addGap(51, 51, 51)
+                            .addComponent(btnBack)
+                            .addGap(337, 337, 337)
+                            .addComponent(refreshTestJButton))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(100, 100, 100)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 472, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btnFresh)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(refreshTestJButton)
+                    .addComponent(btnBack))
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnProcess)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
+
+        populateRequestTable();
+        
+    }//GEN-LAST:event_refreshTestJButtonActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        container.remove(this);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.previous(container);
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
         int row = tblOrders.getSelectedRow();
@@ -166,17 +195,14 @@ public class DeliveryManWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         Order order = (Order) tblOrders.getValueAt(row, 0);
-        ProcessWorkRequestJPanel.show(container, system, order);
+        RestaurantViewOrderJPanel.show(container, system, restaurant, order);
     }//GEN-LAST:event_btnProcessActionPerformed
 
-    private void btnFreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFreshActionPerformed
-        populateTable();
-    }//GEN-LAST:event_btnFreshActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnFresh;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnProcess;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton refreshTestJButton;
     private javax.swing.JTable tblOrders;
     // End of variables declaration//GEN-END:variables
 }

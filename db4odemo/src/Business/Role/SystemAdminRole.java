@@ -8,17 +8,20 @@ import Business.EcoSystem;
 
 import Business.UserAccount.UserAccount;
 import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
+
 import javax.swing.JPanel;
 
 /**
- *
  * @author raunak
  */
-public class SystemAdminRole extends Role{
+public class SystemAdminRole extends Role {
 
-  
+    @Override
+    public RoleType getRoleType() {
+        return RoleType.SysAdmin;
+    }
+
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem system) {
         return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
     }
-    
 }

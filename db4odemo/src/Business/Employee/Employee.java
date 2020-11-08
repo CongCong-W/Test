@@ -19,6 +19,12 @@ public class Employee {
         count++;
     }
 
+    public Employee(String name) {
+        this.name = name;
+        id = count;
+        count++;
+    }
+
     public int getId() {
         return id;
     }

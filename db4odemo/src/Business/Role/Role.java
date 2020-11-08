@@ -6,7 +6,6 @@ package Business.Role;
 
 import Business.EcoSystem;
 
-import Business.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -36,15 +35,17 @@ public abstract class Role {
             return value;
         }
     }
+
+    public abstract RoleType getRoleType();
     
     public abstract JPanel createWorkArea(JPanel userProcessContainer, 
-            UserAccount account,  
+            UserAccount account,
             EcoSystem business);
 
     @Override
     public String toString() {
-        return this.getClass().getName();
+        String className = this.getClass().getSimpleName();
+        return className.substring(0, className.length() - 4);
     }
-    
     
 }

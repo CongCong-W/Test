@@ -1,31 +1,41 @@
 
 
-package userinterface.RestaurantAdminRole;
+package userinterface.CustomerRole;
 
 
+import Business.Customer.Customer;
+import userinterface.RestaurantAdminRole.*;
 import Business.EcoSystem;
-import Business.Restaurant.Restaurant;
 
 import javax.swing.JPanel;
+import java.awt.CardLayout;
 
 /**
  *
  * @author  raunak
  */
-public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
+public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel container;
-    Restaurant restaurant;
     EcoSystem system;
+    Customer customer;
     
     /** Creates new form AdminWorkAreaJPanel */
-    public RestaurantAdminWorkAreaJPanel(JPanel container, Restaurant restaurant, EcoSystem system) {
+    public CustomerWorkAreaJPanel(JPanel container, EcoSystem system, Customer customer) {
         initComponents();
         this.container = container;
-        this.restaurant = restaurant;
+        this.customer = customer;
         this.system = system;
-        valueLabel.setText(restaurant.getEmployee().getName());
+        valueLabel.setText(customer.getEmployee().getName());
     }
+
+    public static void show(JPanel container, EcoSystem system, Customer customer) {
+        CustomerWorkAreaJPanel customerWorkAreaJPanel = new CustomerWorkAreaJPanel(container, system, customer);
+        container.add("CustomerWorkAreaJPanel", customerWorkAreaJPanel);
+        CardLayout layout = (CardLayout) container.getLayout();
+        layout.next(container);
+    }
+
 
     /**
      * Makes the component visible or invisible.
@@ -39,7 +49,7 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
     @Override
     public void setVisible(boolean aFlag) {
         super.setVisible(aFlag);
-        valueLabel.setText(restaurant.getEmployee().getName());
+        valueLabel.setText(customer.getEmployee().getName());
     }
     
     /** This method is called from within the constructor to
@@ -51,7 +61,6 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnMngInfo = new javax.swing.JButton();
         btnMngMenu = new javax.swing.JButton();
         btnMngOrder = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
@@ -60,18 +69,10 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("My Work Area -Adminstrative Role");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+        jLabel1.setText("My Work Area");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
-        btnMngInfo.setText("Manage Restaurant Info");
-        btnMngInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMngInfoActionPerformed(evt);
-            }
-        });
-        add(btnMngInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 280, 180, -1));
-
-        btnMngMenu.setText("Manage Menu");
+        btnMngMenu.setText("View Orders");
         btnMngMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMngMenuActionPerformed(evt);
@@ -79,7 +80,7 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(btnMngMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 180, -1));
 
-        btnMngOrder.setText("Manage Orders");
+        btnMngOrder.setText("View Menu");
         btnMngOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMngOrderActionPerformed(evt);
@@ -88,28 +89,23 @@ public class RestaurantAdminWorkAreaJPanel extends javax.swing.JPanel {
         add(btnMngOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 180, -1));
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Restaurant :");
+        enterpriseLabel.setText("Customer:");
         add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 120, 30));
 
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMngInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMngInfoActionPerformed
-        RestaurantMngInfoJPanel.show(container, system, restaurant);
-    }//GEN-LAST:event_btnMngInfoActionPerformed
-
     private void btnMngMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMngMenuActionPerformed
-        RestaurantMenuManageJPanel.show(container, system, restaurant);
+        CustomerOrderJPanel.show(container, system, customer);
     }//GEN-LAST:event_btnMngMenuActionPerformed
 
     private void btnMngOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMngOrderActionPerformed
-        RestaurantMngOrderJPanel.show(container, system, restaurant);
+        CustomerMenuJPanel.show(container, system, customer);
     }//GEN-LAST:event_btnMngOrderActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMngInfo;
     private javax.swing.JButton btnMngMenu;
     private javax.swing.JButton btnMngOrder;
     private javax.swing.JLabel enterpriseLabel;

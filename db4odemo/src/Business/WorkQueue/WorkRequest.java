@@ -24,6 +24,12 @@ public abstract class WorkRequest {
         requestDate = new Date();
     }
 
+    public WorkRequest(UserAccount receiver, UserAccount sender) {
+        this.sender = sender;
+        this.receiver = receiver;
+        requestDate = new Date();
+    }
+
     public String getMessage() {
         return message;
     }

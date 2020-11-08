@@ -2,17 +2,16 @@ package Business;
 
 import Business.Employee.Employee;
 import Business.Role.SystemAdminRole;
-import Business.UserAccount.UserAccount;
 
 /**
  *
  * @author rrheg
  */
 public class ConfigureASystem {
+
+    private static final EcoSystem system = EcoSystem.getInstance();
     
     public static EcoSystem configure(){
-        
-        EcoSystem system = EcoSystem.getInstance();
         
         //Create a network
         //create an enterprise
